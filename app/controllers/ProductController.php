@@ -23,7 +23,7 @@ class ProductController extends Controller
         $this->view('products/index', $data);
     }
 
-    public function show($id = null)
+   public function show($id = null)
 {
     // Depuración en logs
     error_log("ID recibido en show(): ".print_r($id, true));

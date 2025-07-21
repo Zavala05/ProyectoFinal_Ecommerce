@@ -7,23 +7,7 @@ class App
     protected $method = 'index';
     protected $params = [];
 
-    protected function parseUrl()
-{
-    if (isset($_GET['url'])) {
-        $url = rtrim($_GET['url'], '/');
-        $url = filter_var($url, FILTER_SANITIZE_URL);
-        $urlParts = explode('/', $url);
-        
-        // Asegurar que products/show/ID se convierta en parámetros correctos
-        if (count($urlParts) >= 3 && $urlParts[0] === 'products' && $urlParts[1] === 'show') {
-            return ['products', 'show', $urlParts[2]];
-        }
-        return $urlParts;
-    }
-    return [];
-}
-
-public function __construct()
+   public function __construct()
 {
     $url = $this->parseUrl();
     
@@ -56,6 +40,24 @@ public function __construct()
 
     // 5. Llamar al método
     call_user_func_array([$this->controller, $this->method], $this->params);
+}
+
+protected function parseUrl()
+{
+    if (isset($_GET['url'])) {
+        $url = rtrim($_GET['url'], '/');
+        $url = filter_var($url, FILTER_SANITIZE_URL);
+        
+        // Eliminar el nombre del proyecto si está presente
+        $url = str_replace('proyectofinal_p3/', '', $url);
+        
+        // Dividir y filtrar partes no válidas
+        $parts = explode('/', $url);
+        return array_values(array_filter($parts, function($part) {
+            return !empty($part) && $part !== 'proyectofinal_p3';
+        }));
+    }
+    return [];
 }
     
 }

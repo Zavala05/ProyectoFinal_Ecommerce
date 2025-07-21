@@ -20,10 +20,27 @@
                         <a class="nav-link" href="/">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/product">Productos</a>
+                        <a class="nav-link" href="<?= URL_ROOT ?>/products">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="<?= URL_ROOT ?>/cart" class="btn btn-outline-primary">
+    <i class="fas fa-shopping-cart"></i> Carrito 
+    <?php if (!empty($_SESSION['cart'])) : ?>
+        <span class="badge bg-danger">
+            <?= array_sum($_SESSION['cart']) ?>
+        </span>
+    <?php endif; ?>
+</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container mt-4">
+
+
+    <style>
+        .container{
+            gap: 20px;
+        }
+    </style>

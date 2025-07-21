@@ -10,10 +10,10 @@
                 <p class="text-primary fw-bold">$<?= number_format($product->price, 2) ?></p>
             </div>
             <div class="card-footer bg-white">
-                <a href="<?= URL_ROOT ?>/products/show/<?= $product->id ?>" 
-   class="btn btn-primary">
-   Ver Detalles
-</a>
+                <a href="<?= URL_ROOT ?>/products/show/<?= $product->id ?>" class="btn btn-primary">Ver Detalles</a>
+
+                <a href="<?= URL_ROOT ?>/cart/add/<?= $product->id ?>" class="btn btn-success"><i class="fas fa-cart-plus"></i> Añadir al Carrito</a>
+            
             </div>
         </div>
     </div>
