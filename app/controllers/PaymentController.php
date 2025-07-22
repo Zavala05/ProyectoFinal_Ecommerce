@@ -40,28 +40,56 @@ class PaymentController extends Controller
 }
 
     // Éxito de pago (URL: /payment/success)
-    public function success()
-    {
-        // 1. Simular transacción exitosa
-        $transactionId = 'PAYPAL_' . uniqid();
-        $cartItems = $_SESSION['cart'] ?? []; // Array vacío si no existe
-$amount = $this->calculateTotal($cartItems);
-
-        // 2. Guardar en "base de datos" (simulada)
-        $this->paymentModel->saveTransaction(
-            $transactionId,
-            $amount,
-            'completed'
-        );
-
-        // 3. Limpiar carrito y mostrar éxito
-        unset($_SESSION['cart']);
-        $this->view('payment/success', [
-            'transactionId' => $transactionId,
-            'amount' => $amount
-        ]);
+    public function success() {
+    // 1. Captura datos de PayPal
+    $paymentId = $_GET['paymentId'] ?? null;
+    
+    if (!$paymentId) {
+        $_SESSION['flash_error'] = 'No se recibió confirmación de PayPal';
+        header('Location: ' . URL_ROOT . '/cart');
+        exit();
     }
 
+    // 2. Normaliza el carrito (ESTRUCTURA CLAVE)
+    $cartItems = [];
+    $total = 0;
+    $productModel = $this->model('ProductModel');
+    
+    foreach ($_SESSION['cart'] ?? [] as $productId => $item) {
+        if (is_array($item)) {
+            // Caso 1: Estructura completa [id => [datos]]
+            $cartItems[$productId] = [
+                'id' => $productId,
+                'name' => $item['name'] ?? 'Producto '.$productId,
+                'price' => $item['price'] ?? 0,
+                'quantity' => $item['quantity'] ?? 1
+            ];
+            $total += $item['price'] * $item['quantity'];
+        } else {
+            // Caso 2: Estructura simple [id => cantidad]
+            $product = $productModel->getProductById($productId);
+            $cartItems[$productId] = [
+                'id' => $productId,
+                'name' => $product->name ?? 'Producto '.$productId,
+                'price' => $product->price ?? 0,
+                'quantity' => $item
+            ];
+            $total += $product->price * $item;
+        }
+    }
+
+    // 3. Prepara datos para la vista
+    $data = [
+        'transaction_id' => $paymentId,
+        'amount' => $total,
+        'cart_items' => $cartItems, // ¡Estructura normalizada!
+        'payer_email' => $_SESSION['user_email'] ?? 'No registrado'
+    ];
+
+    // 4. Limpia el carrito y muestra la vista
+    unset($_SESSION['cart']);
+    $this->view('payment/success', $data);
+}
     // Pago cancelado (URL: /payment/cancel)
     public function cancel()
     {

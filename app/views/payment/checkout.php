@@ -32,10 +32,24 @@
                     });
                 },
                 onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        window.location.href = '<?= PAYPAL_RETURN_URL ?>';
-                    });
-                }
+    return actions.order.capture().then(function(details) {
+        // 1. Capturamos los datos clave de PayPal
+        const paymentData = {
+            paymentId: data.orderID,
+            payerId: details.payer.payer_id,
+            amount: '<?= $data['total'] ?>'
+        };
+
+        // 2. Construye la URL con parámetros codificados
+        const successUrl = new URL('<?= PAYPAL_RETURN_URL ?>', window.location.origin);
+        successUrl.searchParams.append('paymentId', paymentData.paymentId);
+        successUrl.searchParams.append('PayerID', paymentData.payerId);
+        successUrl.searchParams.append('amount', paymentData.amount);
+
+        // 3. Redirección con todos los parámetros
+        window.location.href = successUrl.toString();
+    });
+}
             }).render('#paypal-button-container');
         } else {
             // Reintentar después de 3 segundos
