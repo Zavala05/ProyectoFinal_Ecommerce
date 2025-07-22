@@ -44,7 +44,8 @@ class PaymentController extends Controller
     {
         // 1. Simular transacción exitosa
         $transactionId = 'PAYPAL_' . uniqid();
-        $amount = $this->calculateTotal($_SESSION['cart']);
+        $cartItems = $_SESSION['cart'] ?? []; // Array vacío si no existe
+$amount = $this->calculateTotal($cartItems);
 
         // 2. Guardar en "base de datos" (simulada)
         $this->paymentModel->saveTransaction(
@@ -68,22 +69,13 @@ class PaymentController extends Controller
     }
 
    private function calculateTotal($cart) {
-    // Añade validación para arrays
-    if (!is_array($cart)) {
-        error_log("⚠️ El carrito NO es un array: " . print_r($cart, true));
-        return 0.00;
+    if (!is_array($cart) || empty($cart)) {
+        return 0.00; // Retorna 0 si el carrito no es válido
     }
 
     return array_reduce($cart, function($sum, $item) {
-        // Verifica que $item sea un array/objeto válido
-        if (!is_array($item) && !is_object($item)) {
-            error_log("⚠️ Ítem inválido: " . print_r($item, true));
-            return $sum;
-        }
-        
-        $price = is_object($item) ? $item->price : $item['price'];
-        $quantity = is_object($item) ? $item->quantity : $item['quantity'];
-        
+        $price = $item['price'] ?? 0;
+        $quantity = $item['quantity'] ?? 0;
         return $sum + ($price * $quantity);
     }, 0);
 }
