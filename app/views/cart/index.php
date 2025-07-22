@@ -46,8 +46,26 @@ require_once APP_ROOT . '/app/views/layouts/header.php';?>
         </table>
     <?php endif; ?>
 
+   <form action="<?= URL_ROOT ?>/payment/checkout" method="GET" style="display: inline;">
+    <button type="submit" class="btn btn-success py-2 px-4">
+        <i class="fas fa-credit-card mr-2"></i> Pagar con PayPal
+    </button>
+</form>
+
     <a id="volver" href="<?= URL_ROOT ?>/products">Seguir Comprando</a>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const paypalBtn = document.querySelector('form[action*="payment/checkout"] button');
+    
+    paypalBtn.addEventListener('click', function(e) {
+        console.log("Redirigiendo a PayPal...");
+        // Opcional: añadir spinner de carga
+        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+    });
+});
+</script>
 
 <?php require_once APP_ROOT . '/app/views/layouts/footer.php'; ?>
 

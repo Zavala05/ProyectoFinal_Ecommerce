@@ -17,7 +17,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Inicio</a>
+                        <a class="nav-link" href="<?= URL_ROOT ?>/products">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= URL_ROOT ?>/products">Productos</a>

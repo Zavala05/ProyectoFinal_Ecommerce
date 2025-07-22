@@ -5,7 +5,7 @@ class App
 {
     protected $controller = 'ProductController';
     protected $method = 'index';
-    protected $params = [];
+    protected $params   = [];
 
    public function __construct()
 {
@@ -42,20 +42,24 @@ class App
     call_user_func_array([$this->controller, $this->method], $this->params);
 }
 
-protected function parseUrl()
-{
+protected function parseUrl() {
     if (isset($_GET['url'])) {
         $url = rtrim($_GET['url'], '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
         
-        // Eliminar el nombre del proyecto si está presente
-        $url = str_replace('proyectofinal_p3/', '', $url);
+        // Debug: Ver URL original
+        error_log("URL recibida: " . $url);
         
-        // Dividir y filtrar partes no válidas
-        $parts = explode('/', $url);
-        return array_values(array_filter($parts, function($part) {
-            return !empty($part) && $part !== 'proyectofinal_p3';
-        }));
+        // Elimina SOLO si la URL contiene la ruta base completa
+        $basePath = 'nw/proyectofinal_p3/public/';
+        if (strpos($url, $basePath) === 0) {
+            $url = str_replace($basePath, '', $url);
+        }
+        
+        // Debug: Ver URL procesada
+        error_log("URL procesada: " . $url);
+        
+        return explode('/', $url);
     }
     return [];
 }
