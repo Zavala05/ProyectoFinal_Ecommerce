@@ -55,3 +55,36 @@ INSERT INTO products (name, description, price, image, category) VALUES
 ('Memoria RAM Corsair Vengeance RGB Pro 16GB', 'Kit de 2x8GB DDR4 3200MHz, iluminación RGB personalizable', 79.99, 'ram-corsair-rgb.jpg', 'Componentes PC'),
 ('Placa Base ASUS ROG Strix Z690-F Gaming WiFi', 'Placa base ATX, socket LGA 1700, Wi-Fi 6E', 299.99, 'placa-asus-z690.jpg', 'Componentes PC');
 DELETE FROM products ;
+
+-- Tabla principal de pedidos
+CREATE TABLE `orders` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `order_number` VARCHAR(20) NOT NULL UNIQUE,
+  `transaction_id` VARCHAR(50) NOT NULL,
+  `user_id` INT NULL,
+  `customer_name` VARCHAR(100) NOT NULL,
+  `customer_email` VARCHAR(100) NOT NULL,
+  `total_amount` DECIMAL(10,2) NOT NULL,
+  `status` ENUM('pending','completed','cancelled') DEFAULT 'completed',
+  `payment_method` VARCHAR(20) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de items de pedido
+CREATE TABLE `order_items` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `order_id` INT NOT NULL,
+  `product_id` INT NOT NULL,
+  `product_name` VARCHAR(100) NOT NULL,
+  `unit_price` DECIMAL(10,2) NOT NULL,
+  `quantity` INT NOT NULL
+) ENGINE=InnoDB;
+
+-- Añade las FK después:
+ALTER TABLE `order_items` 
+ADD CONSTRAINT `fk_order` 
+FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE;
+
+ALTER TABLE `order_items`
+ADD CONSTRAINT `fk_product`
+FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE SET NULL;
