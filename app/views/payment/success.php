@@ -1,7 +1,7 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <!-- Tarjeta de confirmación -->
+            
             <div class="card border-success shadow-lg">
                 <div class="card-header bg-success text-white">
                     <div class="d-flex align-items-center">
@@ -13,10 +13,10 @@
                 </div>
                 
                 <div class="card-body">
-                    <!-- Resumen de la transacción -->
+                    
                     
 
-                    <!-- Detalles del pedido -->
+                    
                     <div class="mb-4">
                         <h5 class="mb-3">Detalles del Pedido</h5>
                         <div class="table-responsive">
@@ -43,7 +43,7 @@
                         </div>
                     </div>
 
-                    <!-- Productos comprados -->
+                    
                     <div class="mb-4">
                         <h5 class="mb-3">Productos Comprados</h5>
                         <div class="list-group">
@@ -89,7 +89,7 @@
     </div>
 </div>
 
-<!-- Estilos adicionales -->
+
 <style>
     .card {
         border-width: 2px;

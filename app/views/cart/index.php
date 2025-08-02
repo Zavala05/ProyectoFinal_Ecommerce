@@ -15,7 +15,7 @@ require_once APP_ROOT . '/app/views/layouts/header.php';?>
                     <th>Precio</th>
                     <th>Cantidad</th>
                     <th>Subtotal</th>
-                    <th>Acciones</th> <!-- Columna nueva para el botón -->
+                    <th>Acciones</th> 
                 </tr>
             </thead>
             <tbody>
@@ -25,7 +25,7 @@ require_once APP_ROOT . '/app/views/layouts/header.php';?>
                         <td>$<?= number_format($item['product']->price, 2) ?></td>
                         <td><?= $item['quantity'] ?></td>
                         <td>$<?= number_format($item['subtotal'], 2) ?></td>
-                        <!-- Celda nueva con el botón de eliminar -->
+                        
                         <td>
                             <form action="<?= URL_ROOT ?>/cart/remove/<?= $item['id'] ?>" method="POST">
                                 <button type="submit" class="btn btn-danger btn-sm">
@@ -40,7 +40,7 @@ require_once APP_ROOT . '/app/views/layouts/header.php';?>
                 <tr>
                     <th colspan="3">Total</th>
                     <th>$<?= number_format($data['total'], 2) ?></th>
-                    <th></th> <!-- Celda vacía para mantener el diseño -->
+                    <th></th> 
                 </tr>
             </tfoot>
         </table>
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     paypalBtn.addEventListener('click', function(e) {
         console.log("Redirigiendo a PayPal...");
-        // Opcional: añadir spinner de carga
+        
         this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
     });
 });

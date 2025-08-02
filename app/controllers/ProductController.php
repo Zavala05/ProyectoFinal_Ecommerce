@@ -25,7 +25,7 @@ class ProductController extends Controller
 
    public function show($id = null)
 {
-    // Depuración en logs
+    
     error_log("ID recibido en show(): ".print_r($id, true));
     
     if (!is_numeric($id)) {

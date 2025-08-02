@@ -1,13 +1,13 @@
 <div class="container py-5">
     <div class="row">
-        <!-- Botón de volver -->
+        
         <div class="col-12 mb-4">
             <a href="<?= URL_ROOT ?>/products" class="btn btn-outline-dark">
                 <i class="bi bi-arrow-left"></i> Volver al catálogo
             </a>
         </div>
         
-        <!-- Tarjeta del producto -->
+        
         <div class="col-lg-6">
             <div class="card border-0 shadow-lg mb-4">
                 <img src="<?= $data['product']->image ? URL_ROOT.'/'.$data['product']->image : 'https://via.placeholder.com/600x400?text=Tech+Store' ?>" 
@@ -22,7 +22,7 @@
             </div>
         </div>
         
-        <!-- Detalles del producto -->
+        
         <div class="col-lg-6">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body">
@@ -50,25 +50,23 @@
                         </ul>
                     </div>
                     
-                    <!-- Botones de acción -->
+                    
                     <div class="d-flex gap-3">
                         <button class="btn btn-primary btn-lg flex-grow-1">
                             <i class="bi bi-cart-plus"></i> Añadir al carrito
                         </button>
-                        <button class="btn btn-outline-secondary">
-                            <i class="bi bi-heart"></i>
-                        </button>
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Sección de productos relacionados (opcional) -->
+    
     
 </div>
 
-<!-- Estilos personalizados -->
+
 <style>
     .product-image {
         max-height: 500px;

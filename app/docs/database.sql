@@ -53,7 +53,27 @@ INSERT INTO products (name, description, price, image, category) VALUES
 ('Tarjeta Gráfica NVIDIA GeForce RTX 3080', 'Tarjeta gráfica de alto rendimiento para gaming y diseño', 799.99, 'rtx-3080.jpg', 'Componentes PC'),
 ('Procesador Intel Core i9-12900K', 'Procesador de 12ª generación, 16 núcleos, 24 hilos', 549.99, 'intel-i9-12900k.jpg', 'Componentes PC'),
 ('Memoria RAM Corsair Vengeance RGB Pro 16GB', 'Kit de 2x8GB DDR4 3200MHz, iluminación RGB personalizable', 79.99, 'ram-corsair-rgb.jpg', 'Componentes PC'),
-('Placa Base ASUS ROG Strix Z690-F Gaming WiFi', 'Placa base ATX, socket LGA 1700, Wi-Fi 6E', 299.99, 'placa-asus-z690.jpg', 'Componentes PC');
+('Placa Base ASUS ROG Strix Z690-F Gaming WiFi', 'Placa base ATX, socket LGA 1700, Wi-Fi 6E', 299.99, 'placa-asus-z690.jpg', 'Componentes PC'),
+('Laptop Lenovo Legion 5', 'Laptop gaming con AMD Ryzen 7, RTX 3060, 16GB RAM, 1TB SSD', 1199.99, 'lenovo-legion5.jpg', 'Laptops'),
+('Smartphone Google Pixel 7', 'Pantalla AMOLED 6.3", Tensor G2, 128GB, cámara 50MP', 599.99, 'pixel-7.jpg', 'Smartphones'),
+('Monitor Asus ProArt 27"', 'Monitor 4K IPS, 100% sRGB, calibrado de fábrica', 449.99, 'monitor-asus-proart.jpg', 'Monitores'),
+('Teclado Gaming Corsair K95 RGB', 'Mecánico, switches Cherry MX Speed, retroiluminado RGB, macros', 169.99, 'corsair-k95.jpg', 'Accesorios PC'),
+('Mouse Inalámbrico Logitech MX Master 3', 'Ergonómico, sensor Darkfield 4000 DPI, rueda MagSpeed', 99.99, 'mx-master3.jpg', 'Accesorios PC'),
+('Auriculares SteelSeries Arctis 7P', 'Inalámbricos para PS5, audio 3D, micrófono ClearCast', 149.99, 'arctis-7p.jpg', 'Audio'),
+('Tableta Microsoft Surface Pro 8', 'Pantalla 13", Intel Core i5, 8GB RAM, 256GB SSD, teclado incluido', 999.99, 'surface-pro8.jpg', 'Tabletas'),
+('Impresora Canon PIXMA TS3350', 'Multifunción tinta, Wi-Fi, impresión móvil', 89.99, 'canon-ts3350.jpg', 'Impresoras'),
+('Disco Duro Externo WD 4TB My Passport', 'Portátil USB 3.2, protección con contraseña, 4TB', 109.99, 'wd-my-passport.jpg', 'Almacenamiento'),
+('Router ASUS AX6000 RT-AX88U', 'Wi-Fi 6, 8 puertos Gigabit, para gaming', 349.99, 'asus-ax6000.jpg', 'Redes'),
+('Cámara Canon EOS M50 Mark II', 'Mirrorless, 24.1 MP, grabación 4K, pantalla abatible', 699.99, 'canon-m50mk2.jpg', 'Cámaras'),
+('Smart TV TCL 4K 50"', 'UHD HDR, Google TV, Dolby Vision/Atmos', 379.99, 'tcl-4k-50.jpg', 'Televisores'),
+('Consola Xbox Series S', 'Compacta, SSD 512GB, resolución 1440p, Game Pass', 299.99, 'xbox-series-s.jpg', 'Consolas'),
+('Smartwatch Fitbit Sense 2', 'Avanzado monitoreo de salud, ECG, GPS', 299.99, 'fitbit-sense2.jpg', 'Wearables'),
+('Altavoz Sonos Roam', 'Portátil, Wi-Fi/Bluetooth, resistencia IP67, sonido 360°', 179.99, 'sonos-roam.jpg', 'Audio'),
+('Cámara de Seguridad Blink Mini', 'Compacta, 1080p, visión nocturna, compatible con Alexa', 34.99, 'blink-mini.jpg', 'Seguridad y Hogar Inteligente'),
+('Silla Gaming Secretlab Titan Evo', 'Ergonómica, cuero sintético, soporte lumbar ajustable', 499.99, 'secretlab-titan.jpg', 'Accesorios PC'),
+('Base Refrigerante para Laptop Cooler Master NotePal X3', 'Ventilador 200mm, iluminación azul, hasta 17"', 39.99, 'cooler-master-x3.jpg', 'Accesorios PC'),
+('Proyector Epson Home Cinema 880', 'Full HD 1080p, 3300 lúmenes, HDMI, USB', 599.99, 'epson-880.jpg', 'Cámaras'),
+('Cargador USB-C Anker PowerPort III 65W', 'Carga rápida para laptop/smartphone, 3 puertos', 49.99, 'anker-65w.jpg', 'Accesorios Móviles');
 DELETE FROM products ;
 
 -- Tabla principal de pedidos
@@ -85,6 +105,3 @@ ALTER TABLE `order_items`
 ADD CONSTRAINT `fk_order` 
 FOREIGN KEY (`order_id`) REFERENCES `orders`(`id`) ON DELETE CASCADE;
 
-ALTER TABLE `order_items`
-ADD CONSTRAINT `fk_product`
-FOREIGN KEY (`product_id`) REFERENCES `products`(`id`) ON DELETE SET NULL;

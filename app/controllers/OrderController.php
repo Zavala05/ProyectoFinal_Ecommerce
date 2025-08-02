@@ -13,13 +13,13 @@ class OrderController extends Controller
         $this->paymentModel = $this->model('PaymentModel');
     }
 
-    // Cambia el nombre del método para evitar conflicto
+    
     public function show($id) 
     {
         $order = $this->paymentModel->getOrderById($id);
         $items = $this->paymentModel->getOrderItems($id);
         
-        // Usa el método view() del padre correctamente
+        
         parent::view('orders/view', [
             'order' => $order,
             'items' => $items
